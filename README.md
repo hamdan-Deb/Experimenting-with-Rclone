@@ -1,6 +1,6 @@
 <div align="center">
   
-# ☁️ Rclone Cloud Aggregator: A Case Study
+# Rclone Cloud Aggregator: A Case Study
   
 **Aggregating Multiple Cloud Storage Platforms into a Single Unified Dashboard**
 
