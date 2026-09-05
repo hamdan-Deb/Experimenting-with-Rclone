@@ -25,7 +25,7 @@ To launch this secure local dashboard, we run:
 ```bash
 rclone rcd --rc-web-gui
 ```
->![Web GUI Dashboard](imgs/rc_webGui.png)**
+>![Web GUI Dashboard](imgs/rc_webGui.png)
 
 ### Why the Web GUI? (Operational Security)
 Using the Web GUI over standard third-party tools is preferred because it handles data routing natively without passing keys to external visualization services. Most importantly, it allows for the seamless extraction of **shareable links** directly from the UI, ensuring that when you share files, you are generating explicit, temporary access endpoints rather than blindly exposing backend directories.
@@ -46,7 +46,7 @@ Integrating Filen.io required a highly technical API setup involving their comma
 
 ### Step 1: System Environment Preparation
 To execute these scripts securely, we first mapped our system environment paths to include secure version-control binaries (`Git\bin`).
-> 🖼️ **(https://raw.githubusercontent.com/hamdan-Deb/Experimenting-with-Rclone/refs/heads/main/imgs/filen_envGit.png)**
+> ![env](imgs/filen_envGit.png)**
 
 ### Step 2: The Initial Installation Failure
 We attempted a standard bash download for the CLI:
@@ -60,7 +60,7 @@ While this successfully generated the directory (`.filen-cli/bin`), it downloade
 
 ### Step 3: Engineering the Secure PowerShell Fix
 To circumvent this safely, we constructed a complex, multi-layered PowerShell script. 
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 2 - PowerShell showing the failed executables, followed by the complex `Remove-Item` + `Invoke-WebRequest` command]**
+> 🖼️ **![PowerShell showing the failed executables, followed by the complex `Remove-Item` + `Invoke-WebRequest` command](imgs/filen_instPs.png)**
 
 **The Cybersecurity Breakdown of this Command:**
 *   `Remove-Item -Force .\filen*, .\filen_*` - Purges the corrupted/unverified binaries to maintain directory integrity.
