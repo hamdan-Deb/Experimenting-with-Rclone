@@ -25,7 +25,7 @@ To launch this secure local dashboard, we run:
 ```bash
 rclone rcd --rc-web-gui
 ```
-> 🖼️ **(https://raw.githubusercontent.com/hamdan-Deb/Experimenting-with-Rclone/refs/heads/main/imgs/rc_webGui.png)**
+> 🖼️ **[img](https://raw.githubusercontent.com/hamdan-Deb/Experimenting-with-Rclone/refs/heads/main/imgs/rc_webGui.png)**
 
 ### Why the Web GUI? (Operational Security)
 Using the Web GUI over standard third-party tools is preferred because it handles data routing natively without passing keys to external visualization services. Most importantly, it allows for the seamless extraction of **shareable links** directly from the UI, ensuring that when you share files, you are generating explicit, temporary access endpoints rather than blindly exposing backend directories.
