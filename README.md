@@ -124,19 +124,23 @@ As seen in the terminal logs below, the prompt successfully applied its cryptogr
 
 ---
 
-## 🎓 Conclusion: Empowering the Future
+### 🎓 Conclusion: Empowering the Future
 
-By understanding the delicate interplay between local environment variables, forced TLS encryption protocols, strict HTTP header sanitization, and obfuscated configuration files, the invalid headers were completely eradicated. The Rclone GUI aggregated our cloud platforms into a single, unified pane of glass. We successfully bridged **Backblaze, Filen.io, Koofr.net, MEGA.io, and uloz.to** into one decentralized hub.
+By understanding the delicate interplay between local environment variables, forced TLS encryption protocols, strict HTTP header sanitization, and obfuscated configuration files, the invalid headers were completely eradicated. The Rclone GUI aggregated our cloud platforms into a single, unified pane of glass. 
+
+We successfully bridged **Backblaze, Filen.io, Koofr.net, MEGA.io, and uloz.to** into one decentralized hub.
 
 > **![Rclone GUI showing all 5 active drives, with Filen sitting perfectly at 3.7 GB usage!](imgs/rc_remotesOK.png)**
 
-Navigating through remote files, whether it is a zipped archive on MEGA or a document on Filen, now feels instantaneous and native to the local machine. Yet, behind the scenes, we have completely abstracted the vulnerable credential layer away from standard web browsers and centralized our API management. Here's how our RClone GUI looks like now:
+Navigating through remote files, whether it is a zipped archive on MEGA or a document on Filen, now feels instantaneous and native to the local machine. Yet, behind the scenes, we have completely abstracted the vulnerable credential layer away from standard web browsers and centralized our API management. 
+
+Here's how our RClone GUI looks like now:
 
 > **![Rclone GUI dashboard showing OK status for all remote drives](imgs/rc_guiOK.png)**
 
 ---
 
-### The Lesson for Future Generations
+## The Lesson for Future Generations
 
 The lesson for future generations is profound:
 
