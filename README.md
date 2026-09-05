@@ -66,6 +66,7 @@ To circumvent this safely, we constructed a multi-layered PowerShell script.
 *   `Remove-Item -Force .\filen*, .\filen_*` - Purges the corrupted/unverified binaries to maintain directory integrity.
 *   `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12` - A crucial security enforcement. This forces Windows to handshake using **TLS 1.2 encryption**. Without this, the secure connection to GitHub’s repository would drop, preventing Man-in-the-Middle (MitM) attacks during the download.
 *   `Invoke-WebRequest ... -OutFile "filen.exe"` - Safely pulls the exact signed Windows executable.
+*   Filen direct link to down. Cli.exe: _https://github.com/FilenCloudDienste/filen-cli/releases/tag/v0.0.36_
 
 ---
 
@@ -92,7 +93,7 @@ Rclone rejected the configuration, stating: `base64 decode failed when revealing
 
 **Second Obstacle: HTTP Header Injection Prevention**
 After resolving the Base64 parsing, the network refused to open. We encountered a strict HTTP error regarding the `Authorization` header. To investigate if the Filen server was rejecting us, we ran a network diagnostic on the web app.
-> 🖼️ **![Browser Network DevTools tab for `app.filen.io` inspecting live requests](imgs/filen_drive.png)**
+> **![Browser Network DevTools tab for `app.filen.io` inspecting live requests](imgs/filen_drive.png)**
 
 ---
 
@@ -101,7 +102,7 @@ After resolving the Base64 parsing, the network refused to open. We encountered 
 In the cybersecurity world, error logs sometimes lie. We escalated to Filen's Customer Support, who provided a masterclass in how Rclone handles internal security.
 
 > **![First Filen Support ticket reply](/imgs/filen_sup1.png)**
-> **![Second Filen Support ticket detailing the scrambling of the config file and hidden characters](imgs/filen_sup2.png)**
+> **![Second Filen Support ticket detailing the scrambling of the config file and hidden characters](imgs/filen_sup2_.png)**
 
 ### The Insightful Revelations:
 1.  **The Network Never Left the Machine**: The `invalid header` error was actually generated locally. Rclone's HTTP library checks headers *before* transmission. If an API key contains even one hidden, invisible line-break (often picked up accidentally when copying from a terminal), Rclone refuses to open the connection. This is a brilliant security design to prevent Malformed HTTP Header Injection attacks.
