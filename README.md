@@ -114,11 +114,32 @@ rclone config show FileN.io # Shows the scrambled string
 rclone reveal <scrambled_string> # Decodes it to plain-text for verification
 ```
 
+# The Final Triumphant Fix
+
+Following Support's insight, we purged the corrupted manual entry (`rclone config delete FileN.io`) and executed Rclone's built-in interactive wizard (`rclone config`). By carefully extracting a clean key from the PowerShell executable (`.\filen.exe export-api-key`) and pasting it directly into the secure wizard prompt, Rclone's backend took over.
+
+As seen in the terminal logs below, the prompt successfully applied its cryptographic algorithms, printing `*** ENCRYPTED ***` for both the password and API key parameters.
+
+> **![cmd `rclone config` wizard with `*** ENCRYPTED ***` confirming the fix](/imgs/rc_nConfigCmd.png)**
+
 ---
 
 ## 🎓 Conclusion: Empowering the Future
 
-By understanding the delicate interplay between local environment variables, forced TLS encryption protocols, strict HTTP header sanitization, and obfuscated configuration files, we successfully integrated a Zero-Knowledge encrypted cloud platform into a unified aggregator. (Successfully tested alongside Wasabi, AWS, Koofr, Sia.Storage, and Backblaze).
+By understanding the delicate interplay between local environment variables, forced TLS encryption protocols, strict HTTP header sanitization, and obfuscated configuration files, the invalid headers were completely eradicated. The Rclone GUI aggregated our cloud platforms into a single, unified pane of glass. We successfully bridged **Backblaze, Filen.io, Koofr.net, MEGA.io, and uloz.to** into one decentralized hub.
 
-**The lesson for future generations is profound:** 
-True digital security is not about relying on a single mega-corporation to hold all your files. It is about understanding the underlying architecture. By utilizing aggregators, safely rotating API keys, and understanding local cryptographic hygiene, users can reclaim their data sovereignty and build an impenetrable, decentralized digital ecosystem.
+> **![Rclone GUI showing all 5 active drives, with Filen sitting perfectly at 3.7 GB usage!](imgs/rc_remotesOK.png)**
+
+Navigating through remote files, whether it is a zipped archive on MEGA or a document on Filen, now feels instantaneous and native to the local machine. Yet, behind the scenes, we have completely abstracted the vulnerable credential layer away from standard web browsers and centralized our API management. Here's how our RClone GUI looks like now:
+
+> **![Rclone GUI dashboard showing OK status for all remote drives](imgs/rc_guiOK.png)**
+
+---
+
+### The Lesson for Future Generations
+
+The lesson for future generations is profound:
+
+> **True digital security is not about relying on a single mega-corporation to hold all your files. It is about understanding the underlying architecture.**
+
+By utilizing aggregators, safely routing encrypted API keys, and maintaining rigorous local cryptographic hygiene, users can reclaim their data sovereignty and build an impenetrable, decentralized digital ecosystem.
