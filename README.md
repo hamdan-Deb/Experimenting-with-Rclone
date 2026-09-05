@@ -53,14 +53,14 @@ We attempted a standard bash download for the CLI:
 ```bash
 curl -sL https://filen.io/cli.sh | bash
 ```
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 3 - Command Prompt showing `curl` command failing to get a shell profile]**
+> **![cmd showing `curl` command failing to get a shell profile](imgs/filen_curlCli.png)**
 
 While this successfully generated the directory (`.filen-cli/bin`), it downloaded the Linux binary to a Windows machine. As expected, attempting to execute these invalid binaries resulted in a secure failure by the OS.
-> 🖼️ **(https://raw.githubusercontent.com/hamdan-Deb/Experimenting-with-Rclone/refs/heads/main/imgs/filen_binPs.png)**
+> **![.bin foldler]imgs/filen_binPs.png)**
 
 ### Step 3: Engineering the Secure PowerShell Fix
-To circumvent this safely, we constructed a complex, multi-layered PowerShell script. 
-> 🖼️ **![PowerShell showing the failed executables, followed by the complex `Remove-Item` + `Invoke-WebRequest` command](imgs/filen_instPs.png)**
+To circumvent this safely, we constructed a multi-layered PowerShell script. 
+> **![PowerShell showing the failed executables, followed by `Remove-Item` + `Invoke-WebRequest` command](imgs/filen_instPs.png)**
 
 **The Cybersecurity Breakdown of this Command:**
 *   `Remove-Item -Force .\filen*, .\filen_*` - Purges the corrupted/unverified binaries to maintain directory integrity.
@@ -72,13 +72,13 @@ To circumvent this safely, we constructed a complex, multi-layered PowerShell sc
 ## 🗝️ Chapter 4: Key Extraction and Data Sovereignty
 
 With a functional CLI, we successfully established a Zero-Knowledge handshake with the cloud to extract our API keys and verify account limits (30 GiB). Note the strict security prompt (`Proceed? (y/N)`) warning the user before printing the master access token to the screen.
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 9 - Terminal showing `whoami`, `statfs` (30 GiB), `export-api-key`, and `mount` operations]**
+> **![`whoami`, `statfs` (30 GiB), `export-api-key`, and `mount` operations](imgs/filen_apiExp.png)**
 
 Simultaneously, the CLI generated a heavily obfuscated Base64 token on our local disk, a dense cryptographic string containing our session authorizations.
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 7 - The `auth-config` file containing the giant Base64 string]**
+> **![`auth-config` file containing the giant Base64 string](imgs/filen_authConfig.png)**
 
 We safely mapped these variables (`master_keys`, `public_key`, `private_key`) into the Rclone GUI for centralized aggregation.
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 6 - Rclone GUI remote settings showing master/public/private key fields]**
+> **![Rclone GUI remote settings showing master/public/private key fields](imgs/filen_guiRc.png)**
 
 ---
 
@@ -88,12 +88,11 @@ Despite mapping everything perfectly, Rclone threw critical network and cryptogr
 
 **First Obstacle: Cryptographic Parsing**
 Rclone rejected the configuration, stating: `base64 decode failed when revealing password... illegal base64 data`. 
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 8 - Terminal showing the `base64 decode failed` error and the yellow highlighted `invalid header` error]**
+> **![`base64 decode failed` error and the yellow highlighted `invalid header` error](imgs/filen_lsfRc.png)**
 
 **Second Obstacle: HTTP Header Injection Prevention**
 After resolving the Base64 parsing, the network refused to open. We encountered a strict HTTP error regarding the `Authorization` header. To investigate if the Filen server was rejecting us, we ran a network diagnostic on the web app.
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 10 - Blue screen Command Prompt highlighting the yellow `invalid header field value for Authorization` error]**
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 11 - Browser Network DevTools tab for `app.filen.io` inspecting live requests]**
+> 🖼️ **![Browser Network DevTools tab for `app.filen.io` inspecting live requests](imgs/filen_drive.png)**
 
 ---
 
@@ -101,8 +100,8 @@ After resolving the Base64 parsing, the network refused to open. We encountered 
 
 In the cybersecurity world, error logs sometimes lie. We escalated to Filen's Customer Support, who provided a masterclass in how Rclone handles internal security.
 
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 12 - First Filen Support ticket reply explaining that Rclone never actually sent the request]**
-> 🖼️ **[INSERT SCREENSHOT HERE: Image 13 - Second Filen Support ticket detailing the scrambling of the config file and hidden characters]**
+> **![First Filen Support ticket reply](/imgs/filen_sup1.png)**
+> **![Second Filen Support ticket detailing the scrambling of the config file and hidden characters](imgs/filen_sup2.png)**
 
 ### The Insightful Revelations:
 1.  **The Network Never Left the Machine**: The `invalid header` error was actually generated locally. Rclone's HTTP library checks headers *before* transmission. If an API key contains even one hidden, invisible line-break (often picked up accidentally when copying from a terminal), Rclone refuses to open the connection. This is a brilliant security design to prevent Malformed HTTP Header Injection attacks.
