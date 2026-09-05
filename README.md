@@ -56,7 +56,7 @@ curl -sL https://filen.io/cli.sh | bash
 > **![cmd showing `curl` command failing to get a shell profile](imgs/filen_curlCli.png)**
 
 While this successfully generated the directory (`.filen-cli/bin`), it downloaded the Linux binary to a Windows machine. As expected, attempting to execute these invalid binaries resulted in a secure failure by the OS.
-> **![.bin foldler]imgs/filen_binPs.png)**
+> **![.bin foldler](imgs/filen_binPs.png)**
 
 ### Step 3: Engineering the Secure PowerShell Fix
 To circumvent this safely, we constructed a multi-layered PowerShell script. 
